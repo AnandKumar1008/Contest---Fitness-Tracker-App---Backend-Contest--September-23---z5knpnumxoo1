@@ -1,4 +1,4 @@
-const Goal = require('../models/goalModel');
+const Goal = require("../models/goalModel");
 
 // const createGoal = async (req, res) => {
 //   try {
@@ -12,8 +12,6 @@ const Goal = require('../models/goalModel');
 //       .json({ message: 'Internal server error', error: error.message });
 //   }
 // };
-
-const Goal = require('../models/goalModel'); // Import the Goal model
 
 const createGoal = async (req, res) => {
   try {
@@ -31,14 +29,16 @@ const createGoal = async (req, res) => {
     const savedGoal = await newGoal.save();
 
     // If the goal is created successfully, respond with a 201 status and a success message
-    res.status(201).json({ message: 'Goal created successfully', goal: savedGoal });
+    res
+      .status(201)
+      .json({ message: "Goal created successfully", goal: savedGoal });
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
-
-
 
 // const getGoals = async (req, res) => {
 //   try {
@@ -65,16 +65,15 @@ const getGoals = async (req, res) => {
       res.status(200).json(goals);
     } else {
       // If no goals are found, send a 404 response with a message
-      res.status(404).json({ message: 'No goals found' });
+      res.status(404).json({ message: "No goals found" });
     }
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
-
-
-
 
 // const getGoalById = async (req, res) => {
 //   const goalId = req.params.id;
@@ -104,11 +103,13 @@ const getGoalById = async (req, res) => {
       res.status(200).json(goal);
     } else {
       // If no goal is found with the specified ID, send a 404 response with a message
-      res.status(404).json({ message: 'Goal not found' });
+      res.status(404).json({ message: "Goal not found" });
     }
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 
@@ -135,18 +136,24 @@ const updateGoal = async (req, res) => {
 
   try {
     // Use Goal.findByIdAndUpdate(goalId, updateInfo, { new: true }) to update the goal
-    const updatedGoal = await Goal.findByIdAndUpdate(goalId, updateInfo, { new: true });
+    const updatedGoal = await Goal.findByIdAndUpdate(goalId, updateInfo, {
+      new: true,
+    });
 
     if (updatedGoal) {
       // If the goal is updated successfully, respond with a 200 status and the updated goal
-      res.status(200).json({ message: 'Goal updated successfully', goal: updatedGoal });
+      res
+        .status(200)
+        .json({ message: "Goal updated successfully", goal: updatedGoal });
     } else {
       // If no goal is found with the specified ID, respond with a 404 status and a message
-      res.status(404).json({ message: 'Goal not found' });
+      res.status(404).json({ message: "Goal not found" });
     }
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 
@@ -175,18 +182,20 @@ const deleteGoal = async (req, res) => {
 
     if (deletedGoal) {
       // If the goal is deleted successfully, respond with a 200 status and the deleted goal
-      res.status(200).json({ message: 'Goal deleted successfully', goal: deletedGoal });
+      res
+        .status(200)
+        .json({ message: "Goal deleted successfully", goal: deletedGoal });
     } else {
       // If no goal is found with the specified ID, respond with a 404 status and a message
-      res.status(404).json({ message: 'Goal not found' });
+      res.status(404).json({ message: "Goal not found" });
     }
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
-
-
 
 // const sortGoals = async (req, res) => {
 //   const order = req.params.order;
@@ -208,7 +217,8 @@ const sortGoals = async (req, res) => {
 
   try {
     // Define the sorting criteria based on the 'order' parameter
-    const sortCriteria = order === 'asc' ? { target: 1 } : order === 'desc' ? { target: -1 } : {};
+    const sortCriteria =
+      order === "asc" ? { target: 1 } : order === "desc" ? { target: -1 } : {};
 
     // Retrieve and sort goals from the database based on the 'sortCriteria'
     const sortedGoals = await Goal.find().sort(sortCriteria);
@@ -219,11 +229,13 @@ const sortGoals = async (req, res) => {
       res.status(200).json(sortedGoals);
     } else {
       // If no goals are found, respond with a 404 status and a message
-      res.status(404).json({ message: 'No goals found' });
+      res.status(404).json({ message: "No goals found" });
     }
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 
@@ -256,11 +268,13 @@ const getGoalsByType = async (req, res) => {
       res.status(200).json(goals);
     } else {
       // If no goals are found for the given type, respond with a 404 status and a message
-      res.status(404).json({ message: 'No goals found for the given type' });
+      res.status(404).json({ message: "No goals found for the given type" });
     }
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 
@@ -281,7 +295,6 @@ const getGoalsByType = async (req, res) => {
 //   }
 // };
 
-
 const getGoalsByDeadline = async (req, res) => {
   const deadline = new Date(req.params.deadline);
 
@@ -294,11 +307,15 @@ const getGoalsByDeadline = async (req, res) => {
       res.status(200).json(goals);
     } else {
       // If no goals are found before the given deadline, respond with a 404 status and a message
-      res.status(404).json({ message: 'No goals found before the given deadline' });
+      res
+        .status(404)
+        .json({ message: "No goals found before the given deadline" });
     }
   } catch (error) {
     // Handle errors and send a 500 response with an error message
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 
